@@ -55,6 +55,7 @@ class HeurekaFeedItemFacade
     public function getItems(DomainConfig $domainConfig, ?int $lastSeekId, int $maxResults): iterable
     {
         $pricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
+        /** @var \Shopsys\FrameworkBundle\Model\Product\Product[] $products */
         $products = $this->heurekaProductRepository->getProducts($domainConfig, $pricingGroup, $lastSeekId, $maxResults);
         $this->productDataBatchLoader->loadForProducts($products, $domainConfig);
 
